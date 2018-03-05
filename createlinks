@@ -1,0 +1,16 @@
+#!/usr/bin/perl -w
+
+use esmith::Build::CreateLinks qw(:all);
+
+
+my $event = 'nethserver-docker-update';
+event_actions ( $event, 'initialize-default-databases' => '00');
+
+event_actions($event, qw(
+    nethserver-docker-installation 10
+));
+
+#restart services following one event
+event_services($event, qw(
+    docker restart
+));
