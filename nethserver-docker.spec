@@ -8,6 +8,7 @@ Release: %{release}%{?dist}
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
+Requires: docker-ce
 BuildRequires: nethserver-devtools
 BuildArch: noarch
 
@@ -39,6 +40,7 @@ rm -f %{name}-%{version}-%{release}-filelist
 rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}-%{version}-%{release}-filelist
+%config(noreplace) /etc/yum.repos.d/docker-ce.repo
 %defattr(-,root,root)
 %dir %{_nseventsdir}/%{name}-update
 %doc COPYING
