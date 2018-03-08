@@ -1,0 +1,21 @@
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target shorewall.service
+Wants=network-online.target
+
+[Service]
+{
+use esmith::NetworksDB;
+my $ndb = esmith::NetworksDB->open_ro();
+my $IP;
+if (!defined($ndb->red)) {
+    @greens = $ndb->green;
+    $IP = $greens['0']->prop('ipaddr');
+    }
+elsif (defined($ndb->red)){
+    @reds = $ndb->red;
+    $IP = $reds['0']->prop('ipaddr');
+}
+$OUT .= "ExecStart=\nExecStart=/usr/bin/dockerd --ip $IP"
+}

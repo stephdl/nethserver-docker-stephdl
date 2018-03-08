@@ -6,6 +6,9 @@ use esmith::Build::CreateLinks qw(:all);
 my $event = 'nethserver-docker-update';
 event_actions ( $event, 'initialize-default-databases' => '00');
 
+event_templates($event, qw(
+   /etc/systemd/system/docker.service.d/nethserver.conf 
+));
 #restart services following one event
 event_services($event, qw(
     docker restart
