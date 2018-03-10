@@ -25,7 +25,7 @@ Docker containers and tooling make building and shipping applications dramatical
 %build
 %{makedocs}
 perl createlinks
-
+mkdir -p root/etc/systemd/system/docker.service.d
 %install
 rm -rf $RPM_BUILD_ROOT
 (cd root   ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
