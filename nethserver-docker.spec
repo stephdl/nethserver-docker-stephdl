@@ -1,7 +1,7 @@
 Summary: nethserver-docker install docker
 %define name nethserver-docker
 Name: %{name}
-%define version 0.1.0
+%define version 0.1.2
 %define release 1
 Version: %{version}
 Release: %{release}%{?dist}
@@ -16,7 +16,9 @@ BuildArch: noarch
 Docker containers and tooling make building and shipping applications dramatically easier and faster.
 
 %changelog
-* Tue May 09 2017 stephane de Labrusse <stephdl@de-labrusse.fr>
+* Sun Mar 18 2018 stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.2
+- bridge assign on the first green nic
+* Mon Mar 05 2018 stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.0
 - initial
 
 %prep
