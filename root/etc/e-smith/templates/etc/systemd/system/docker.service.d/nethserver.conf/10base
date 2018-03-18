@@ -9,11 +9,11 @@ Wants=network-online.target
 use esmith::NetworksDB;
 my $ndb = esmith::NetworksDB->open_ro();
 my $IP;
-if (!defined($ndb->red)) {
+if (defined($ndb->green)) {
     @greens = $ndb->green;
     $IP = $greens['0']->prop('ipaddr');
     }
-elsif (defined($ndb->red)){
+elsif (!defined($ndb->green)){
     @reds = $ndb->red;
     $IP = $reds['0']->prop('ipaddr');
 }
