@@ -1,7 +1,7 @@
 Summary: nethserver-docker install docker
 %define name nethserver-docker
 Name: %{name}
-%define version 0.1.3
+%define version 0.1.4
 %define release 1
 Version: %{version}
 Release: %{release}%{?dist}
@@ -16,7 +16,8 @@ BuildArch: noarch
 Docker containers and tooling make building and shipping applications dramatically easier and faster.
 
 %changelog
-* Sat Mar 24 2018  stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.3
+* Sat Mar 24 2018  stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.4
+- Restrict docker IP following access prop
 - allow docker to connect to host via shorewall
 * Sun Mar 18 2018 stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.2
 - bridge assign on the first green nic
