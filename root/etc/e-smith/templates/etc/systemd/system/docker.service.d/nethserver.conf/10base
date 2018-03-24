@@ -8,14 +8,44 @@ Wants=network-online.target
 {
 use esmith::NetworksDB;
 my $ndb = esmith::NetworksDB->open_ro();
+my $docker = $docker{'access'} || '';
 my $IP;
-if (defined($ndb->green)) {
-    @greens = $ndb->green;
-    $IP = $greens['0']->prop('ipaddr');
-    }
-elsif (!defined($ndb->green)){
-    @reds = $ndb->red;
-    $IP = $reds['0']->prop('ipaddr');
+
+if (($docker eq '') || ($docker eq 'none')) {
+    $IP = '127.0.0.1';
 }
-$OUT .= "ExecStart=\nExecStart=/usr/bin/dockerd --ip $IP"
+
+elsif (($docker eq 'green') || ($docker eq 'private')) {
+    if (defined($ndb->green)) {
+        @greens = $ndb->green;
+         $IP = $greens['0']->prop('ipaddr');
+    }
+}
+
+elsif (($docker =~ 'red') || ($docker eq 'public')) {
+    if (defined($ndb->red)){
+        @reds = $ndb->red;
+        $IP = $reds['0']->prop('ipaddr');
+    }
+}
+
+elsif ($docker =~ 'orange') {
+    if (defined($ndb->orange)){
+        @oranges = $ndb->orange;
+        $IP = $oranges['0']->prop('ipaddr');
+    }
+}
+
+elsif ($docker =~ 'blue') {
+    if (defined($ndb->blue)){
+        @blues = $ndb->blue;
+        $IP = $blues['0']->prop('ipaddr');
+    }
+}
+
+if ( ! defined $IP) {
+    $IP = '127.0.0.1';
+}
+
+$OUT .= "ExecStart=\nExecStart=/usr/bin/dockerd --ip $IP";
 }
