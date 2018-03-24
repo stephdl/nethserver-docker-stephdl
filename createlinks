@@ -13,3 +13,15 @@ event_templates($event, qw(
 event_services($event, qw(
     docker restart
 ));
+
+#
+# firewall-adjust
+#
+
+event_templates('firewall-adjust', qw(
+   /etc/systemd/system/docker.service.d/nethserver.conf
+));
+
+event_services('firewall-adjust', qw(
+    docker restart
+));
